@@ -1,9 +1,12 @@
 package died.guia06;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import died.guia06.util.Registro;
 
-public class Alumno implements Comparable {
+
+public class Alumno implements Comparable<Alumno> {
 
 	private String nombre;
 	private Integer nroLibreta;
@@ -16,6 +19,8 @@ public class Alumno implements Comparable {
 		nombre=nom;
 		nroLibreta=lib;
 		creditos=0;
+		this.cursando = new ArrayList<Curso>();
+		this.aprobados = new ArrayList<Curso>();
 	}
 	
 	
@@ -41,12 +46,6 @@ public class Alumno implements Comparable {
 		
 	}
 	
-	public Alumno comparar(Alumno a) {
-		if(this.nombre.compareTo(a.nombre) < 0) {
-			return this;
-		}
-		return a;
-	}
 
 	public String getNombre() {
 		return nombre;
@@ -62,6 +61,16 @@ public class Alumno implements Comparable {
 
 	public void setNroLibreta(Integer nroLibreta) {
 		this.nroLibreta = nroLibreta;
+	}
+
+	@Override
+    public String toString() {
+        return nombre + " LU: " + nroLibreta;
+    }
+
+	@Override
+	public int compareTo(Alumno o) {
+		return this.getNombre().compareTo(o.getNombre());
 	}
 	
 	

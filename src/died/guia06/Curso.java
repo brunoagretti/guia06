@@ -2,6 +2,7 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -15,6 +16,66 @@ import died.guia06.util.Registro;
  *
  */
 public class Curso {
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public Integer getCicloLectivo() {
+		return cicloLectivo;
+	}
+
+
+	public void setCicloLectivo(Integer cicloLectivo) {
+		this.cicloLectivo = cicloLectivo;
+	}
+
+
+	public Integer getCupo() {
+		return cupo;
+	}
+
+
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
+
+
+	public Integer getCreditosRequeridos() {
+		return creditosRequeridos;
+	}
+
+
+	public void setCreditosRequeridos(Integer creditosRequeridos) {
+		this.creditosRequeridos = creditosRequeridos;
+	}
+	
+
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+
 
 	private Integer id;
 	private String nombre;
@@ -30,17 +91,22 @@ public class Curso {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
+		this.creditos=0;
+		this.cupo = 0;
+	}
+	
+	public Curso(String nombre, int id, int ciclo, int cupo, int creditos) {
+		super();
+		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
+		this.nombre=nombre;
+		this.id=id;
+		this.cicloLectivo=ciclo;
+		this.creditos=creditos;
+		this.cupo = cupo;
 	}
 	
 
-	public Integer getCreditos() {
-		return creditos;
-	}
-
-
-	public void setCreditos(Integer creditos) {
-		this.creditos = creditos;
-	}
 
 
 	/**
@@ -58,7 +124,13 @@ public class Curso {
 	 */
 	public Boolean inscribir(Alumno a) {
 		try {
-			log.registrar(this, "inscribir ",a.toString());
+			if(a.creditosObtenidos()>=creditos && inscriptos.size()<cupo && a.cursando.size()<3) {
+				log.registrar(this, "inscribir ",a.toString());
+				inscriptos.add(a);
+				a.inscripcionAceptada(this);
+			} else {
+				return false;
+			}
 			return true;
 		} catch (IOException e1) {
 			System.out.println("Ha ocurrido un error: " + e1);
@@ -72,6 +144,8 @@ public class Curso {
 	 */
 	public void imprimirInscriptos() {
 		try {
+			Collections.sort(inscriptos);
+			System.out.println(inscriptos);
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		} catch (IOException e2) {
 			System.out.println("Ha ocurrido un error: " + e2);
