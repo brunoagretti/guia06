@@ -33,6 +33,16 @@ public class Curso {
 	}
 	
 
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+
+
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
 	 * agrega el curso a la lista de cursos en los que está inscripto el alumno y retorna verdadero.
