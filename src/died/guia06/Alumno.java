@@ -8,8 +8,8 @@ public class Alumno implements Comparable {
 	private String nombre;
 	private Integer nroLibreta;
 	private Integer creditos;
-	private List<Curso> cursando;
-	private List<Curso> aprobados;
+	public List<Curso> cursando;
+	public List<Curso> aprobados;
 	
 
 	public Alumno(String nom, int lib) {
