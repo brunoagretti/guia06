@@ -17,6 +17,16 @@ import died.guia06.util.Registro;
  */
 public class Curso {
 
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+
+
+	public void setInscriptos(List<Alumno> inscriptos) {
+		this.inscriptos = inscriptos;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
