@@ -105,7 +105,7 @@ public class Curso {
 		this.cupo = 0;
 	}
 	
-	public Curso(String nombre, int id, int ciclo, int cupo, int creditos) {
+	public Curso(String nombre, int id, int ciclo, int cupo, int creditos, int creditReq) {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
@@ -114,6 +114,7 @@ public class Curso {
 		this.cicloLectivo=ciclo;
 		this.creditos=creditos;
 		this.cupo = cupo;
+		this.creditosRequeridos=creditReq;
 	}
 	
 
@@ -134,7 +135,7 @@ public class Curso {
 	 */
 	public Boolean inscribir(Alumno a) {
 		try {
-			if(a.creditosObtenidos()>=creditos && inscriptos.size()<cupo && a.cursando.size()<3) {
+			if(a.creditosObtenidos()>=creditosRequeridos && inscriptos.size()<cupo && a.cursando.size()<3) {
 				log.registrar(this, "inscribir ",a.toString());
 				inscriptos.add(a);
 				a.inscripcionAceptada(this);
@@ -161,6 +162,11 @@ public class Curso {
 			System.out.println("Ha ocurrido un error: " + e2);
 		}
 	}
+	
+	@Override
+    public String toString() {
+        return "Curso " + nombre + " ID: " + id;
+    }
 
 
 }
