@@ -14,9 +14,24 @@ class CursoTest {
 		Alumno a = new Alumno("facundo", 14);
 		Alumno b = new Alumno("esteban", 15);
 		Alumno c = new Alumno("zoe", 16);
-		C.inscribir(a);
-		C.inscribir(b);
-		C.inscribir(c);
+		try {
+			C.inscribir(a);
+		} catch (FaltanCreditosException | CupoException | MaxMateriasException | RegistroAuditoriaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			C.inscribir(b);
+		} catch (FaltanCreditosException | CupoException | MaxMateriasException | RegistroAuditoriaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			C.inscribir(c);
+		} catch (FaltanCreditosException | CupoException | MaxMateriasException | RegistroAuditoriaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(3, C.getInscriptos().size());
 		ArrayList<Alumno> listaAux = new ArrayList<Alumno>();
 		listaAux.add(b);

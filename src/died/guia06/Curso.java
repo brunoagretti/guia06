@@ -133,21 +133,44 @@ public class Curso {
 	 * @param a
 	 * @return
 	 */
-	public Boolean inscribir(Alumno a) {
+	public Boolean inscribir(Alumno a) throws FaltanCreditosException, CupoException, MaxMateriasException, RegistroAuditoriaException {
 		try {
-			if(a.creditosObtenidos()>=creditosRequeridos && inscriptos.size()<cupo && a.cursando.size()<3) {
-				log.registrar(this, "inscribir ",a.toString());
-				inscriptos.add(a);
-				a.inscripcionAceptada(this);
+			if(a.creditosObtenidos()<creditosRequeridos) {
+				throw new FaltanCreditosException();
 			} else {
-				return false;
+				if(inscriptos.size()>=cupo) {
+					throw new CupoException();
+				} else {
+					if (a.cursando.size()>=3) {
+						throw new MaxMateriasException();
+					}
+				}
 			}
+			log.registrar(this, "inscribir ",a.toString());
+			inscriptos.add(a);
+			a.inscripcionAceptada(this);
 			return true;
 		} catch (IOException e1) {
-			System.out.println("Ha ocurrido un error: " + e1);
-			return false;
+			throw new RegistroAuditoriaException();
+		}
+		
+	}
+	
+	public void inscribirAlumno(Alumno a) {
+		try {
+			inscribir(a);
+		} catch(FaltanCreditosException e1) {
+			System.out.println("El alumno no tiene los creditos necesarios para inscribirse.");
+		} catch(CupoException e2) {
+			System.out.println("Este curso se ha quedado sin cupos");
+		} catch(MaxMateriasException e3) {
+			System.out.println("El alumno ya está inscripto a 3 materias");
+		} catch(RegistroAuditoriaException e4) {
+			System.out.println("Ha ocurrido un error: " + e4);
 		}
 	}
+	
+	
 	
 	
 	/** 

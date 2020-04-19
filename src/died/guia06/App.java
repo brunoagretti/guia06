@@ -3,6 +3,8 @@ package died.guia06;
 public class App {
 
 	public static void main(String[] args) {
+		/* (SE REDEFINIO INSCRIBIR, HAY QUE HACER EL APP DE VUELTA)
+		
 		Curso A = new Curso("Matematica I", 1, 2020, 1, 25, 0);
 		Curso B = new Curso("Matematica II", 2, 2020, 50, 25, 0);
 		Curso C = new Curso("Matematica III", 3, 2020, 50, 25, 0);
@@ -43,6 +45,6 @@ public class App {
 		
 		
 		
-		
+		*/
 	}
 }
